@@ -9,7 +9,7 @@ class LinkedList {
     this.head = null;
     this.size = 0;
   }
-
+  // prototypes
   add(element) {
     var newNode = new Node(element);
     var tempHead = this.head;
@@ -24,7 +24,7 @@ class LinkedList {
     this.size++;
   }
   getNode(index) {
-    if (this.size <= index || this.size == 0) {
+    if (this.size < index || this.size == 0) {
       return `incorrect index, max size ${this.size}`;
     } else {
       var tempHead = this.head;
@@ -54,10 +54,32 @@ class LinkedList {
       prevHead.next = newNode;
     }
   }
+  deleteNode(index) {
+    if (index == 0) {
+      this.head = null;
+      this.size = 0;
+    } else if (this.size <= index) {
+      console.log("invalid index");
+    } else {
+      let tempHead = this.head;
+      let current = 0;
+      let prevHead = tempHead;
+      while (current < index) {
+        prevHead = tempHead;
+        tempHead = tempHead.next;
+        current++;
+      }
+      prevHead.next = tempHead.next;
+    }
+  }
 }
 let l = new LinkedList();
 l.add("first Node");
 l.add("Second Node");
 l.add("third Node");
-l.insertNode("second again", 0);
+l.insertNode("second again", 1);
+l.deleteNode(2);
 console.log(l.getNode(0));
+console.log(l.getNode(1));
+console.log(l.getNode(2));
+console.log(l.getNode(3));
